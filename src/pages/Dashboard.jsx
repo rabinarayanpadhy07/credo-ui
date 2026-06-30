@@ -122,7 +122,7 @@ const Dashboard = () => {
             onClick={() => navigate('/expenses')}
             className="flex items-center gap-1.5 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 transition-all rounded-xl font-semibold text-xs text-white cursor-pointer shadow-lg shadow-emerald-950/20"
           >
-            <Plus className="w-3.5 h-3.5 text-slate-900" />
+            <Plus className="w-3.5 h-3.5 text-white" />
             Add Expense
           </button>
         </div>

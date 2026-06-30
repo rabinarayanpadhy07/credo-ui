@@ -73,11 +73,8 @@ const Layout = () => {
       {/* Sidebar - Desktop */}
       <aside className="hidden md:flex flex-col w-64 bg-slate-900/60 border-r border-slate-800/80 backdrop-blur-md p-4 shrink-0">
         <div className="flex items-center gap-2 px-3 py-4 mb-6">
-          <div className="p-2 bg-gradient-to-tr from-emerald-500 to-teal-400 rounded-xl shadow-lg shadow-emerald-500/20">
-            <Landmark className="w-5 h-5 text-slate-950" />
-          </div>
           <span className="text-xl font-bold tracking-tight text-white bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
-            Credo Finance
+            Credo 
           </span>
         </div>
 
