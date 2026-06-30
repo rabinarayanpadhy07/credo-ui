@@ -15,7 +15,7 @@ import {
   Edit2,
   Trash2,
   Calendar,
-  DollarSign,
+  IndianRupee,
   Tag,
   FileText,
 } from 'lucide-react';
@@ -181,9 +181,9 @@ const Expenses = () => {
           </button>
           <button
             onClick={openAddModal}
-            className="flex items-center gap-1.5 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 transition-all rounded-xl font-semibold text-xs text-white cursor-pointer shadow-lg shadow-emerald-950/20"
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 transition-all rounded-xl font-semibold text-xs text-slate-950 cursor-pointer shadow-lg shadow-emerald-950/20"
           >
-            <Plus className="w-3.5 h-3.5 text-slate-900" />
+            <Plus className="w-3.5 h-3.5 text-slate-950" />
             Add Expense
           </button>
         </div>
@@ -288,7 +288,7 @@ const Expenses = () => {
                       {new Date(exp.date).toLocaleDateString()}
                     </td>
                     <td className="py-3.5 text-right font-bold text-rose-400 font-outfit">
-                      -${exp.amount.toFixed(2)}
+                      -₹{exp.amount.toFixed(2)}
                     </td>
                     <td className="py-3.5 text-center">
                       <div className="flex justify-center gap-2">
@@ -369,10 +369,10 @@ const Expenses = () => {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                Amount ($)
+                Amount (₹)
               </label>
               <div className="relative">
-                <DollarSign className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                <IndianRupee className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                 <input
                   type="number"
                   placeholder="0.00"

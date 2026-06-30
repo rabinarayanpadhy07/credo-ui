@@ -180,7 +180,7 @@ const Transactions = () => {
                       {new Date(tx.date).toLocaleDateString()}
                     </td>
                     <td className={`py-4 text-right font-bold font-outfit ${tx.type === 'income' ? 'text-emerald-400' : 'text-rose-400'}`}>
-                      {tx.type === 'income' ? '+' : '-'}${tx.amount.toFixed(2)}
+                      {tx.type === 'income' ? '+' : '-'}₹{tx.amount.toFixed(2)}
                     </td>
                   </tr>
                 ))}

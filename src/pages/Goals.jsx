@@ -11,7 +11,7 @@ import {
   Edit2,
   Trash2,
   Calendar,
-  DollarSign,
+  IndianRupee,
   FileText,
   CheckCircle,
   Clock,
@@ -177,9 +177,9 @@ const Goals = () => {
         </div>
         <button
           onClick={openAddModal}
-          className="flex items-center gap-1.5 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 transition-all rounded-xl font-semibold text-xs text-white cursor-pointer shadow-lg shadow-emerald-950/20"
+          className="flex items-center gap-1.5 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 transition-all rounded-xl font-semibold text-xs text-slate-950 cursor-pointer shadow-lg shadow-emerald-950/20"
         >
-          <Plus className="w-3.5 h-3.5 text-slate-900" />
+          <Plus className="w-3.5 h-3.5 text-slate-950" />
           Create Goal
         </button>
       </div>
@@ -227,7 +227,7 @@ const Goals = () => {
                         )}
                       </div>
                       <h3 className="text-xl font-bold text-white font-outfit">
-                        ${g.currentAmount.toLocaleString()} / <span className="text-sm text-slate-500">${g.targetAmount.toLocaleString()}</span>
+                        ₹{g.currentAmount.toLocaleString()} / <span className="text-sm text-slate-500">₹{g.targetAmount.toLocaleString()}</span>
                       </h3>
                     </div>
 
@@ -314,10 +314,10 @@ const Goals = () => {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                Target ($)
+                Target (₹)
               </label>
               <div className="relative">
-                <DollarSign className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                <IndianRupee className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                 <input
                   type="number"
                   placeholder="0.00"
@@ -347,10 +347,10 @@ const Goals = () => {
           {isEditing && (
             <div>
               <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                Accumulated Amount ($)
+                Accumulated Amount (₹)
               </label>
               <div className="relative">
-                <DollarSign className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                <IndianRupee className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                 <input
                   type="number"
                   placeholder="0.00"
@@ -377,10 +377,10 @@ const Goals = () => {
           
           <div>
             <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              Contribution Amount ($)
+              Contribution Amount (₹)
             </label>
             <div className="relative">
-              <DollarSign className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <IndianRupee className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
               <input
                 type="number"
                 placeholder="e.g. 150"
@@ -390,7 +390,7 @@ const Goals = () => {
               />
             </div>
             <p className="text-[10px] text-slate-500 mt-1 pl-1">
-              This amount will be added to your current accumulated balance of **${selectedGoal?.currentAmount.toLocaleString()}**.
+              This amount will be added to your current accumulated balance of **₹{selectedGoal?.currentAmount.toLocaleString()}**.
             </p>
           </div>
 

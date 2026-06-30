@@ -9,7 +9,7 @@ import {
   PiggyBank,
   Plus,
   Trash2,
-  DollarSign,
+  IndianRupee,
   Tag,
   Calendar,
   Sparkles,
@@ -161,9 +161,9 @@ const Budgets = () => {
           </button>
           <button
             onClick={openSetModal}
-            className="flex items-center gap-1.5 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 transition-all rounded-xl font-semibold text-xs text-white cursor-pointer shadow-lg shadow-emerald-950/20"
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 transition-all rounded-xl font-semibold text-xs text-slate-950 cursor-pointer shadow-lg shadow-emerald-950/20"
           >
-            <Plus className="w-3.5 h-3.5 text-slate-900" />
+            <Plus className="w-3.5 h-3.5 text-slate-950" />
             Set Budget
           </button>
         </div>
@@ -215,7 +215,7 @@ const Budgets = () => {
                 <div className="flex items-start justify-between">
                   <div className="space-y-0.5">
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">{b.category}</span>
-                    <h3 className="text-xl font-bold text-white font-outfit">${b.limit.toLocaleString()}</h3>
+                    <h3 className="text-xl font-bold text-white font-outfit">₹{b.limit.toLocaleString()}</h3>
                   </div>
                   <button
                     onClick={() => openDeleteModal(b)}
@@ -227,7 +227,7 @@ const Budgets = () => {
 
                 {/* Progress details */}
                 <div className="mt-4 flex items-center justify-between text-xs font-semibold">
-                  <span className="text-slate-400">Spent: ${b.spent.toLocaleString()}</span>
+                  <span className="text-slate-400">Spent: ₹{b.spent.toLocaleString()}</span>
                   <span className={`${b.isOverBudget ? 'text-rose-400' : b.percentUsed >= 85 ? 'text-amber-400' : 'text-emerald-400'}`}>
                     {b.percentUsed}%
                   </span>
@@ -248,10 +248,10 @@ const Budgets = () => {
                   {b.isOverBudget ? (
                     <span className="text-rose-400 font-bold flex items-center gap-0.5">
                       <AlertTriangle className="w-3 h-3" />
-                      Over limit by ${Math.abs(b.limit - b.spent).toLocaleString()}
+                      Over limit by ₹{Math.abs(b.limit - b.spent).toLocaleString()}
                     </span>
                   ) : (
-                    <span>Remaining: ${(b.limit - b.spent).toLocaleString()}</span>
+                    <span>Remaining: ₹{(b.limit - b.spent).toLocaleString()}</span>
                   )}
                 </div>
               </div>
@@ -293,10 +293,10 @@ const Budgets = () => {
 
           <div>
             <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              Monthly Limit ($)
+              Monthly Limit (₹)
             </label>
             <div className="relative">
-              <DollarSign className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <IndianRupee className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
               <input
                 type="number"
                 placeholder="e.g. 500"
@@ -353,7 +353,7 @@ const Budgets = () => {
                   <div className="flex-1 space-y-1">
                     <div className="flex items-center gap-1.5 justify-between">
                       <span className="text-xs font-bold text-slate-200">{rec.category}</span>
-                      <span className="text-xs font-bold text-emerald-400 font-outfit">${rec.limit} / mo</span>
+                      <span className="text-xs font-bold text-emerald-400 font-outfit">₹{rec.limit} / mo</span>
                     </div>
                     <p className="text-[10px] text-slate-400 leading-relaxed">{rec.reason}</p>
                   </div>

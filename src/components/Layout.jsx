@@ -11,7 +11,6 @@ import {
   PiggyBank,
   Target,
   Bot,
-  Landmark,
   Settings,
   LogOut,
   Menu,
@@ -123,10 +122,7 @@ const Layout = () => {
             <div className="relative flex flex-col w-64 max-w-xs bg-slate-900 p-4 z-10 border-r border-slate-800 h-full">
               <div className="flex items-center justify-between px-3 py-4 mb-6">
                 <div className="flex items-center gap-2">
-                  <div className="p-2 bg-gradient-to-tr from-emerald-500 to-teal-400 rounded-xl">
-                    <Landmark className="w-5 h-5 text-slate-950" />
-                  </div>
-                  <span className="text-lg font-bold text-white">Credo</span>
+                  <span className="text-lg font-bold text-white tracking-tight">Credo</span>
                 </div>
                 <button
                   onClick={() => setMobileOpen(false)}
@@ -188,8 +184,8 @@ const Layout = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            
-            {/* Theme Toggle */}
+
+            {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
               className="p-2.5 text-slate-400 hover:text-white bg-slate-900/60 border border-slate-800 hover:border-slate-700/80 rounded-xl transition-all duration-250 cursor-pointer shadow-md"

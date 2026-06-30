@@ -57,12 +57,11 @@ Ask me anything about your finances! For example:
     setLoading(true);
 
     try {
-      // API call to ai chat controller
       const res = await apiFetch('/ai/chat', {
         method: 'POST',
         body: JSON.stringify({
           message: text,
-          history: updatedHistory.slice(1), // omit the initial welcome message from Gemini API
+          history: updatedHistory.slice(1, -1), // omit the initial welcome message and the current user message
         }),
       });
 
@@ -195,7 +194,7 @@ Ask me anything about your finances! For example:
           <button
             type="submit"
             disabled={loading || !message.trim()}
-            className="p-3 bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-800 disabled:text-slate-600 rounded-xl text-white transition-colors cursor-pointer flex items-center justify-center shadow-lg shadow-emerald-950/20"
+            className="p-3 bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-800 disabled:text-slate-600 rounded-xl text-slate-950 transition-colors cursor-pointer flex items-center justify-center shadow-lg shadow-emerald-950/20"
           >
             <Send className="w-4 h-4" />
           </button>

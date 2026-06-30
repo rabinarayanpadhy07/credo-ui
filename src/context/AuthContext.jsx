@@ -50,17 +50,6 @@ export const AuthProvider = ({ children }) => {
     return res;
   };
 
-  const loginWithGoogle = async (idToken) => {
-    const res = await apiFetch('/auth/google', {
-      method: 'POST',
-      body: JSON.stringify({ idToken }),
-    });
-    const { accessToken, user: userData } = res.data;
-    setToken(accessToken);
-    setUser(userData);
-    return res;
-  };
-
   const logout = async () => {
     try {
       await apiFetch('/auth/logout', { method: 'POST' });
@@ -82,7 +71,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, loginWithGoogle, logout, updateProfile, checkSession }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, updateProfile, checkSession }}>
       {children}
     </AuthContext.Provider>
   );

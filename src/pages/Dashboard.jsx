@@ -37,6 +37,7 @@ const Dashboard = () => {
   const [data, setData] = useState(null);
   const [insights, setInsights] = useState('');
   const [insightsLoading, setInsightsLoading] = useState(false);
+  const [insightsError, setInsightsError] = useState(false);
 
   const fetchDashboardData = async () => {
     try {
@@ -51,14 +52,27 @@ const Dashboard = () => {
 
   const fetchAIInsights = async () => {
     setInsightsLoading(true);
+    setInsightsError(false);
     try {
       const res = await apiFetch('/ai/insights');
       setInsights(res.data.insights);
     } catch {
+      setInsightsError(true);
       showToast('Could not load AI Insights', 'info');
     } finally {
       setInsightsLoading(false);
     }
+  };
+
+  const renderInsightsContent = (content) => {
+    if (!content) return null;
+    let html = content
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/^- (.*?)$/gm, '• $1')
+      .replace(/\n/g, '<br />');
+    
+    return <span dangerouslySetInnerHTML={{ __html: html }} />;
   };
 
   useEffect(() => {
@@ -120,9 +134,9 @@ const Dashboard = () => {
           </button>
           <button
             onClick={() => navigate('/expenses')}
-            className="flex items-center gap-1.5 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 transition-all rounded-xl font-semibold text-xs text-white cursor-pointer shadow-lg shadow-emerald-950/20"
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 transition-all rounded-xl font-semibold text-xs text-slate-950 cursor-pointer shadow-lg shadow-emerald-950/20"
           >
-            <Plus className="w-3.5 h-3.5 text-white" />
+            <Plus className="w-3.5 h-3.5 text-slate-950" />
             Add Expense
           </button>
         </div>
@@ -140,7 +154,7 @@ const Dashboard = () => {
               <TrendingUp className="w-4 h-4" />
             </div>
           </div>
-          <h3 className="text-2xl font-bold text-white mb-1 font-outfit">${monthlyIncome.toLocaleString()}</h3>
+          <h3 className="text-2xl font-bold text-white mb-1 font-outfit">₹{monthlyIncome.toLocaleString()}</h3>
           <p className="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
             <ArrowUpRight className="w-3.5 h-3.5" />
             Active Cash Inflow
@@ -156,7 +170,7 @@ const Dashboard = () => {
               <TrendingDown className="w-4 h-4" />
             </div>
           </div>
-          <h3 className="text-2xl font-bold text-white mb-1 font-outfit">${monthlyExpense.toLocaleString()}</h3>
+          <h3 className="text-2xl font-bold text-white mb-1 font-outfit">₹{monthlyExpense.toLocaleString()}</h3>
           <p className="text-[10px] text-rose-400 font-semibold flex items-center gap-1">
             <ArrowDownRight className="w-3.5 h-3.5" />
             Active Cash Outflow
@@ -173,7 +187,7 @@ const Dashboard = () => {
             </div>
           </div>
           <h3 className={`text-2xl font-bold mb-1 font-outfit ${savings >= 0 ? 'text-white' : 'text-rose-400'}`}>
-            {savings < 0 ? '-' : ''}${Math.abs(savings).toLocaleString()}
+            {savings < 0 ? '-' : ''}₹{Math.abs(savings).toLocaleString()}
           </h3>
           <p className="text-[10px] text-teal-400 font-semibold flex items-center gap-1">
             Net balance this month
@@ -200,22 +214,35 @@ const Dashboard = () => {
       {/* AI insights callout banner */}
       <div className="p-6 rounded-2xl bg-gradient-to-r from-emerald-950/40 to-teal-950/30 border border-emerald-500/20 relative overflow-hidden shadow-inner flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-400/5 rounded-full blur-3xl" />
-        <div className="flex gap-4 items-start">
-          <div className="p-3 bg-emerald-500/15 text-emerald-400 rounded-xl mt-0.5 border border-emerald-500/10">
+        <div className="flex gap-4 items-start w-full">
+          <div className="p-3 bg-emerald-500/15 text-emerald-400 rounded-xl mt-0.5 border border-emerald-500/10 shrink-0">
             <Bot className="w-5 h-5" />
           </div>
-          <div className="space-y-1 max-w-xl text-left">
+          <div className="space-y-2 text-left flex-1 min-w-0">
             <h4 className="text-sm font-bold text-emerald-300 flex items-center gap-1.5">
               Credo AI Insights
             </h4>
-            <div className="text-xs text-slate-300 leading-relaxed max-w-lg line-clamp-3">
+            <div className="text-xs text-slate-350 leading-relaxed max-h-48 overflow-y-auto pr-2 custom-scrollbar">
               {insightsLoading ? (
-                <div className="flex items-center gap-2 text-slate-400 animate-pulse">
+                <div className="flex items-center gap-2 text-slate-400 animate-pulse py-1">
                   Analyzing database context...
                 </div>
+              ) : insightsError ? (
+                <div className="flex items-center gap-3 text-rose-400 py-1">
+                  <span>Failed to load financial insights.</span>
+                  <button
+                    onClick={fetchAIInsights}
+                    className="px-2.5 py-1 bg-rose-500/20 hover:bg-rose-500/30 border border-rose-500/30 text-rose-300 font-bold rounded-lg transition-colors cursor-pointer"
+                  >
+                    Retry
+                  </button>
+                </div>
+              ) : !insights ? (
+                <div className="text-slate-500 py-1">
+                  No insights available. Log some transactions to get started.
+                </div>
               ) : (
-                insights.replace(/^[#\s\S]*?💡.*?\n\n/g, '').replace(/^[#\s\S]*?Insights.*?\n\n/g, '') ||
-                'Loading customized recommendations...'
+                renderInsightsContent(insights)
               )}
             </div>
           </div>
@@ -239,7 +266,7 @@ const Dashboard = () => {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={barChartData} barSize={40}>
                 <XAxis dataKey="name" stroke="#64748b" fontSize={11} tickLine={false} axisLine={false} />
-                <YAxis stroke="#64748b" fontSize={11} tickLine={false} axisLine={false} tickFormatter={(v) => `$${v}`} />
+                <YAxis stroke="#64748b" fontSize={11} tickLine={false} axisLine={false} tickFormatter={(v) => `₹${v}`} />
                 <Tooltip
                   cursor={{ fill: 'rgba(255,255,255,0.03)' }}
                   contentStyle={{
@@ -292,7 +319,7 @@ const Dashboard = () => {
                         color: '#f8fafc',
                         fontSize: '12px',
                       }}
-                      formatter={(v) => `$${v}`}
+                      formatter={(v) => `₹${v}`}
                     />
                   </PieChart>
                 </ResponsiveContainer>
@@ -358,7 +385,7 @@ const Dashboard = () => {
                           </span>
                         </td>
                         <td className={`py-3 text-right font-bold ${tx.type === 'income' ? 'text-emerald-400' : 'text-rose-400'}`}>
-                          {tx.type === 'income' ? '+' : '-'}${tx.amount.toFixed(2)}
+                          {tx.type === 'income' ? '+' : '-'}₹{tx.amount.toFixed(2)}
                         </td>
                       </tr>
                     ))}
@@ -389,7 +416,7 @@ const Dashboard = () => {
                     <div className="flex justify-between text-xs font-semibold">
                       <span className="text-slate-300">{b.category}</span>
                       <span className="text-slate-400">
-                        ${b.spent.toLocaleString()} / <span className="text-slate-500">${b.limit.toLocaleString()}</span>
+                        ₹{b.spent.toLocaleString()} / <span className="text-slate-500">₹{b.limit.toLocaleString()}</span>
                       </span>
                     </div>
                     <div className="h-2 w-full bg-slate-950 rounded-full overflow-hidden border border-slate-800/60">

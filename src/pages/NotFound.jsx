@@ -25,7 +25,7 @@ const NotFound = () => {
         </p>
         <Link
           to="/"
-          className="inline-flex items-center gap-2 px-5 py-3 bg-emerald-600 hover:bg-emerald-500 transition-colors text-white font-bold text-xs rounded-xl shadow-lg shadow-emerald-950/30 cursor-pointer"
+          className="inline-flex items-center gap-2 px-5 py-3 bg-emerald-600 hover:bg-emerald-500 transition-colors text-slate-950 font-bold text-xs rounded-xl shadow-lg shadow-emerald-950/30 cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Dashboard

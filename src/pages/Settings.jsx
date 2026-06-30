@@ -8,8 +8,6 @@ import {
   Lock,
   Loader2,
   Shield,
-  Palette,
-  CheckCircle,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -111,17 +109,7 @@ const Settings = () => {
             Password Security
           </button>
 
-          <button
-            onClick={() => setActiveTab('appearance')}
-            className={`flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold shrink-0 cursor-pointer w-full transition-all ${
-              activeTab === 'appearance'
-                ? 'bg-emerald-600/10 text-emerald-400 border border-emerald-500/20'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/30 border border-transparent'
-            }`}
-          >
-            <Palette className="w-4 h-4" />
-            Preferences
-          </button>
+
         </div>
 
         {/* Content Box */}
@@ -172,7 +160,7 @@ const Settings = () => {
                 <button
                   type="submit"
                   disabled={profileLoading}
-                  className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-700 transition-colors text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-emerald-950/30"
+                  className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-700 transition-colors text-slate-950 font-bold text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-emerald-950/30"
                 >
                   {profileLoading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   Save Profile
@@ -194,27 +182,21 @@ const Settings = () => {
 
               <form onSubmit={handlePasswordSubmit} className="space-y-4 max-w-md">
                 
-                {user?.googleId && !user?.password ? (
-                  <div className="p-4 bg-emerald-950/40 border border-emerald-500/20 text-emerald-300 rounded-2xl text-xs leading-relaxed mb-4">
-                    💡 **OAuth Notice:** You signed up via Google. You do not have a local password set yet. Setting one below will let you log in using both methods.
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 pl-1">
+                    Current Password
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                    <input
+                      type="password"
+                      placeholder="••••••••"
+                      value={currentPassword}
+                      onChange={(e) => setCurrentPassword(e.target.value)}
+                      className="w-full pl-11 pr-4 py-3 bg-slate-950/60 border border-slate-800 rounded-xl text-sm focus:border-emerald-500 outline-none text-white"
+                    />
                   </div>
-                ) : (
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 pl-1">
-                      Current Password
-                    </label>
-                    <div className="relative">
-                      <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
-                      <input
-                        type="password"
-                        placeholder="••••••••"
-                        value={currentPassword}
-                        onChange={(e) => setCurrentPassword(e.target.value)}
-                        className="w-full pl-11 pr-4 py-3 bg-slate-950/60 border border-slate-800 rounded-xl text-sm focus:border-emerald-500 outline-none text-white"
-                      />
-                    </div>
-                  </div>
-                )}
+                </div>
 
                 <div>
                   <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 pl-1">
@@ -251,7 +233,7 @@ const Settings = () => {
                 <button
                   type="submit"
                   disabled={securityLoading}
-                  className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-700 transition-colors text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-emerald-950/30"
+                  className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-700 transition-colors text-slate-950 font-bold text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-emerald-950/30"
                 >
                   {securityLoading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   Change Password
@@ -260,42 +242,7 @@ const Settings = () => {
             </motion.div>
           )}
 
-          {activeTab === 'appearance' && (
-            <motion.div
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="space-y-6"
-            >
-              <div>
-                <h3 className="text-base font-bold text-white mb-1">Theme Preferences</h3>
-                <p className="text-xs text-slate-400">Customize the visual interface of the platform</p>
-              </div>
 
-              <div className="space-y-4 max-w-md">
-                <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-2xl flex items-start gap-4 justify-between">
-                  <div className="space-y-0.5">
-                    <h4 className="text-xs font-bold text-slate-200">Light / Dark Theme</h4>
-                    <p className="text-[10px] text-slate-400 leading-relaxed">
-                      Toggle themes using the visual preferences trigger located in the main header.
-                    </p>
-                  </div>
-                  <span className="px-2 py-0.5 bg-emerald-950 border border-emerald-500/30 text-emerald-400 rounded-full text-[9px] font-bold flex items-center gap-0.5">
-                    <CheckCircle className="w-2.5 h-2.5" />
-                    Responsive
-                  </span>
-                </div>
-
-                <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-2xl flex items-start gap-4 justify-between">
-                  <div className="space-y-0.5">
-                    <h4 className="text-xs font-bold text-slate-200">Database Cloud Sync</h4>
-                    <p className="text-[10px] text-slate-400 leading-relaxed">
-                      All your budget targets, transaction lists, and chatbot memory are stored securely in MongoDB Atlas.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
 
         </div>
 

@@ -9,7 +9,6 @@ import { Loader2 } from 'lucide-react';
 const Login = lazy(() => import('./pages/Login.jsx'));
 const Landing = lazy(() => import('./pages/Landing.jsx'));
 const Register = lazy(() => import('./pages/Register.jsx'));
-const ForgotPassword = lazy(() => import('./pages/ForgotPassword.jsx'));
 const Dashboard = lazy(() => import('./pages/Dashboard.jsx'));
 const Incomes = lazy(() => import('./pages/Incomes.jsx'));
 const Expenses = lazy(() => import('./pages/Expenses.jsx'));
@@ -83,14 +82,7 @@ function App() {
               </PublicRoute>
             }
           />
-          <Route
-            path="/forgot-password"
-            element={
-              <PublicRoute>
-                <ForgotPassword />
-              </PublicRoute>
-            }
-          />
+
 
           {/* Protected Application Routes */}
           <Route
