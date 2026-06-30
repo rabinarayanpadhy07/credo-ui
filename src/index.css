@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+
+:root {
+  font-family: OutFit;
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --surface-secondary: #f1f5f9;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  --border: #e2e8f0;
+
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+
+  --success: #16a34a;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+
+  --shadow:
+    0 2px 6px rgba(15, 23, 42, 0.05), 0 12px 32px rgba(15, 23, 42, 0.08);
+}
+html {
+  font-family: OutFit;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  color: var(--text-primary);
+  font-family: inherit;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(22, 163, 74, 0.08),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(37, 99, 235, 0.05),
+      transparent 30%
+    ),
+    var(--background);
+}
+
+/* Global Typography */
+
+* {
+  font-family: OutFit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: OutFit;
+}
+
+/* Focus */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Containers */
+
+.bg-slate-950,
+.bg-slate-950\/60,
+.bg-slate-900,
+.bg-slate-900\/40,
+.bg-slate-900\/50,
+.bg-slate-900\/60,
+.bg-slate-900\/90,
+.bg-slate-800,
+.bg-slate-800\/30,
+.bg-slate-800\/40,
+.bg-slate-800\/50,
+.bg-slate-800\/60,
+.bg-slate-800\/80,
+.bg-slate-850 {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid var(--border);
+}
+
+/* Text */
+
+.text-white,
+.text-slate-100,
+.text-slate-200,
+.text-slate-300 {
+  color: var(--text-primary) !important;
+}
+
+.text-slate-400,
+.text-slate-500,
+.text-slate-600 {
+  color: var(--text-secondary) !important;
+}
+
+/* Borders */
+
+.border-slate-850,
+.border-slate-800,
+.border-slate-800\/35,
+.border-slate-800\/40,
+.border-slate-800\/50,
+.border-slate-800\/60,
+.border-slate-800\/80,
+.border-slate-700,
+.border-slate-700\/40,
+.border-slate-700\/50,
+.border-slate-700\/80 {
+  border-color: var(--border) !important;
+}
+
+/* Shadows */
+
+.shadow-2xl,
+.shadow-xl,
+.shadow-lg,
+.shadow-md {
+  box-shadow: var(--shadow) !important;
+}
+
+/* Glass */
+
+.backdrop-blur-sm,
+.backdrop-blur-md {
+  backdrop-filter: blur(16px);
+}
+
+/* Radius */
+
+.rounded-xl,
+.rounded-2xl,
+.rounded-3xl {
+  border-radius: 16px !important;
+}
+
+/* Primary */
+
+.bg-emerald-500,
+.bg-emerald-600 {
+  background: var(--primary) !important;
+}
+
+.hover\:bg-emerald-500:hover,
+.hover\:bg-emerald-600:hover {
+  background: var(--primary-hover) !important;
+}
+
+.text-emerald-300,
+.text-emerald-400 {
+  color: var(--primary) !important;
+}
+
+/* Status */
+
+.text-rose-400 {
+  color: var(--danger) !important;
+}
+
+.text-blue-400 {
+  color: var(--info) !important;
+}
+
+.text-amber-400 {
+  color: var(--warning) !important;
+}
+
+/* Forms */
+
+input,
+textarea,
+select {
+  background: #fff !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.12);
+}
+
+::placeholder {
+  color: var(--text-muted);
+}
